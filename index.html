@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Feliz Aniversário!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles comuns */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Styles para a página de boas-vindas */
+        #welcome {
+            display: none;
+            animation: fadeIn 2s;
+        }
+
+        #welcome h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color: #ff4081;
+        }
+
+        #welcome button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            color: #ff4081;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #welcome button:hover {
+            background-color: #ff4081;
+            color: #fff;
+        }
+
+        /* Styles para a página de aniversário */
+        #birthday {
+            display: none;
+        }
+
+        #birthday h1, #birthday p {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeIn 2s;
+        }
+
+        #birthday h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ff4081;
+        }
+
+        #birthday p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        #birthday video {
+            width: 100%;
+            max-width: 900px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            animation: slideUp 2s;
+        }
+
+        .balloon {
+            position: fixed;
+            width: 150px;
+            bottom: 20px;
+        }
+
+        #balloon1 {
+            left: 20px;
+        }
+
+        #balloon2 {
+            right: 20px;
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        @keyframes slideUp {
+            from {transform: translateY(30px); opacity: 0;}
+            to {transform: translateY(0); opacity: 1;}
+        }
+    </style>
+</head>
+<body>
+    <!-- Página de boas-vindas -->
+    <div id="welcome">
+        <h1>Bem-vindo!</h1>
+        <p>Estamos preparando algo especial para você. Clique no botão abaixo para continuar.</p>
+        <button onclick="startBirthday()">Começar</button>
+    </div>
+
+    <!-- Página de aniversário -->
+    <div id="birthday">
+        <h1>Feliz Aniversário!</h1>
+        <p>Preparamos uma surpresa especial para você. Esperamos que goste!</p>
+        <video id="video" controls autoplay muted>
+            <source id="video-source" src="seuvideo.mp4" type="video/mp4">
+            Desculpe, seu navegador não suporta vídeos embutidos.
+        </video>
+        <img id="balloon1" class="balloon" src="caminho_para_sua_imagem_balao.png" alt="Balloon">
+        <img id="balloon2" class="balloon" src="caminho_para_sua_imagem_balao.png" alt="Balloon">
+    </div>
+
+    <script>
+        // Quando a página carregar, exibe a página de boas-vindas
+        window.onload = function() {
+            document.getElementById('welcome').style.display = 'block';
+        }
+
+        // Quando o botão "Começar" é clicado, exibe a página de aniversário e inicia o vídeo
+        function startBirthday() {
+            document.getElementById('welcome').style.display = 'none';
+            document.getElementById('birthday').style.display = 'block';
+        }
+
+        // Quando o primeiro vídeo terminar, inicia o segundo vídeo
+        document.getElementById('video').addEventListener('ended', function(e) {
+            var video = e.target;
+            var source = document.getElementById('video-source');
+            
+            if (source.getAttribute('src') == 'seuvideo.mp4') {
+                source.setAttribute('src', 'seuvideo2.mp4');
+                video.load();
+                video.play();
+            }
+        });
+    </script>
+</body>
+</html>
